@@ -1,13 +1,16 @@
 import { DrawGrid, updatedKey, completeGrid } from "../../utils/utils";
 import "../../App.css";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 function FillGridWithAlpha({ cipherKey }) {
+  const navigate=useNavigate();
+  if(!cipherKey){
+    return;
+  }
   const key = updatedKey(cipherKey);
-  const grid = completeGrid(key);
+  const grid=completeGrid(key);
 
-  const key_set = new Set(key && key.split(""));
+  const key_set=new Set(key.split(""));
 
   const alphabet = [
     "A",
@@ -37,15 +40,6 @@ function FillGridWithAlpha({ cipherKey }) {
     "Z",
   ];
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!cipherKey) {
-      navigate("./");
-      return;
-    }
-  }, [cipherKey]);
-
   return (
     <div>
       <div
@@ -71,22 +65,16 @@ function FillGridWithAlpha({ cipherKey }) {
         </div>
         <ul>
           <li>
-            Complete the grid with remaining alphabets which are not present in
-            the grid. Remember to ignore 'J'.
+            Complete the grid with remaining alphabets which are not present in the grid. Remember to ignore 'J'.
             <div className="dup-rem">
               {alphabet.map((c, i) => (
-                <span
-                  key={i}
-                  style={
-                    key_set && key_set.has(c) ? { color: "lightgray" } : {}
-                  }
-                >
+                <span key={i} style={key_set.has(c) ? { color: "lightgray" } : {}}>
                   {c}
                 </span>
               ))}
             </div>
-            <div style={{ margin: "20px" }}>
-              {grid ? <DrawGrid grid={grid} key_set={key_set} /> : ""}
+            <div style={{margin:"20px"}}>
+              <DrawGrid grid={grid} key_set={key_set}/>
             </div>
           </li>
         </ul>

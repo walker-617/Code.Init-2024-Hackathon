@@ -4,6 +4,7 @@ import {
   getCipher,
   DrawGrid,
   DrawGridColor,
+  getText,
   completeGrid,
   updatedKey,
   getdigraphs,
@@ -11,14 +12,15 @@ import {
 } from "../../utils/utils";
 import { useEffect, useState } from "react";
 
-function EncryptWithKeyGrid({ text, cipherKey }) {
+function DecryptWithKeyGrid({ cipher, cipherKey }) {
   const navigate = useNavigate();
+
   const key = updatedKey(cipherKey);
   const grid = completeGrid(key);
 
   let char_pos = getCharPos(grid);
 
-  const digraphs = getdigraphs(text);
+  const digraphs = getdigraphs(cipher);
 
   const [count, setCount] = useState(0);
   const [styles, setStyles] = useState();
@@ -26,13 +28,11 @@ function EncryptWithKeyGrid({ text, cipherKey }) {
   const [rule, setrule] = useState("");
 
   useEffect(() => {
-    if(!text || !cipherKey)
-    {
+    if (!cipher || !cipherKey) {
       return;
     }
-
-    const ab = digraphs? digraphs[count]:null;
-    const { xy, rule_ } = getCipher(grid, ab, char_pos);
+    const ab = digraphs[count];
+    const { xy, rule_ } = getText(grid, ab, char_pos);
 
     setrule(rule_);
 
@@ -61,7 +61,7 @@ function EncryptWithKeyGrid({ text, cipherKey }) {
       return;
     }
     const ab = digraphs[count];
-    const { xy, rule } = getCipher(grid, ab, char_pos);
+    const { xy, rule } = getText(grid, ab, char_pos);
 
     const a = ab[0],
       b = ab[1];
@@ -78,17 +78,12 @@ function EncryptWithKeyGrid({ text, cipherKey }) {
     setCount(i);
   }
 
-  if(!text || !cipherKey) {
-    return;
-  }
-  
-
   return (
     <div>
       <div
         className="next"
         onClick={() => {
-          navigate("../encryption-result");
+          navigate("../decryption-result");
         }}
       >
         Next
@@ -96,7 +91,7 @@ function EncryptWithKeyGrid({ text, cipherKey }) {
       <div
         className="back"
         onClick={() => {
-          navigate("../encrypt-rule3");
+          navigate("../decrypt-rule3");
         }}
       >
         Back
@@ -110,20 +105,21 @@ function EncryptWithKeyGrid({ text, cipherKey }) {
           <li>
             Now apply these rules to digraphs obtained.
             <div className="dup-rem" style={{ justifyContent: "center" }}>
-              {digraphs.map((c, i) => (
-                <span
-                  key={i}
-                  onClick={() => changedigraph(i)}
-                  className="digraph-block"
-                  id={"digraph-block" + i}
-                >
-                  {c}&nbsp;&nbsp;
-                </span>
-              ))}
+              {digraphs &&
+                digraphs.map((c, i) => (
+                  <span
+                    key={i}
+                    onClick={() => changedigraph(i)}
+                    className="digraph-block"
+                    id={"digraph-block" + i}
+                  >
+                    {c}&nbsp;&nbsp;
+                  </span>
+                ))}
             </div>
             <div className="transformation" style={{ margin: "20px" }}>
               <div className="input-cells">
-                Plain digraph{" "}
+                Cipher digraph{" "}
                 <div className="cell" style={styles && styles[points.a]}>
                   {points && points.a}
                 </div>
@@ -131,12 +127,17 @@ function EncryptWithKeyGrid({ text, cipherKey }) {
                   {points && points.b}
                 </div>
               </div>
-              <DrawGridColor
-                grid={grid}
-                ab={digraphs[count]}
-                xy={getCipher(grid, digraphs[count], char_pos).xy}
-                i={count}
-              />
+              {grid ? (
+                <DrawGridColor
+                  grid={grid}
+                  ab={digraphs[count]}
+                  xy={getText(grid, digraphs[count], char_pos).xy}
+                  i={count}
+                />
+              ) : (
+                ""
+              )}
+
               <div className="output-cells">
                 <div className="cell" style={styles && styles[points.x]}>
                   {points && points.x}
@@ -144,19 +145,22 @@ function EncryptWithKeyGrid({ text, cipherKey }) {
                 <div className="cell" style={styles && styles[points.y]}>
                   {points && points.y}
                 </div>{" "}
-                Encrypted digraph
+                Decrypted digraph
               </div>
             </div>
           </li>
         </ul>
-        <div className="rule-block" onClick={() => {
-          navigate("../encrypt-"+rule.replace(" ",""));
-        }}>
-          <div className="rule">{"< This encryption follows " + rule}</div>
+        <div
+          className="rule-block"
+          onClick={() => {
+            navigate("../decrypt-" + rule.replace(" ", ""));
+          }}
+        >
+          <div className="rule">{"< This decryption follows " + rule}</div>
         </div>
       </div>
     </div>
   );
 }
 
-export default EncryptWithKeyGrid;
+export default DecryptWithKeyGrid;

@@ -1,48 +1,49 @@
 import { useNavigate } from "react-router-dom";
 import { split_string } from "../../utils/utils";
+import React, { useEffect } from "react";
 
 function SplitText({ text }) {
-  // const splittedText = split_string(text)
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  if(!text){
+    return;
+  }
 
-  const divideIntoDigrams = (str) => {
-    const digrams = [];
+  const divideIntodigraphs = (str) => {
+    const digraphs = [];
     for (let i = 0; i < str.length; i += 2) {
-      const digram = str.slice(i, i + 2);
-      digrams.push(digram);
+      const digraph = str.slice(i, i + 2);
+      digraphs.push(digraph);
     }
-    return digrams;
+    return digraphs;
   };
 
-  let temp1 = "";
+  let textX = "";
   const inserted_chars = new Set();
-  let ans = [text[0]];
+  let textZ = [text[0]];
   let a=0;
   for (let i = 1; i < text.length; i++) {
     if (text[i] === text[i - 1]) {
-      ans.push("X");
+      textZ.push("X");
       inserted_chars.add(i+a);
       a++;
     }
-    ans.push(text[i]);
+    textZ.push(text[i]);
   }
-  temp1 = [...ans];
-  if (ans.length % 2 !== 0) {
-    ans.push("Z");
+  textX = [...textZ];
+  if (textZ.length % 2 !== 0) {
+    textZ.push("Z");
   }
-
-  const temp2 = divideIntoDigrams(ans.join(""));
 
   return (
     <div>
-    <div
+      <div
         className="next"
         onClick={() => {
-          navigate("../encrypt-with-grid");
+          navigate("../encrypt-rule1");
         }}
       >
-        N
+        Next
       </div>
       <div
         className="back"
@@ -50,36 +51,54 @@ function SplitText({ text }) {
           navigate("../fill-grid");
         }}
       >
-        B
+        Back
       </div>
-      <div> - Insert X between every repeated characters</div>
-      <div>
-        {temp1.map((char, index) => (
-          <span
-            key={index}
-            style={inserted_chars.has(index) ? { color: "red" } : {}}
-          >
-            {char}
-          </span>
-        ))}
-      </div>
-
-      <div> - If string is odd length, append Z at end of the string</div>
-      <div>
-        {ans.map((char, index) => (
-          <span
-            key={index}
-            style={(temp1.length%2===1 && index===ans.length-1) ? { color: "red" } : {}}
-          >
-            {char}
-          </span>
-        ))}
-      </div>
-      <div> - Divide the string into di-grams( 2 character words )</div>
-      <div>
-        {temp2.map((char, index) => (
-          <span key={index}>{char}{" "}</span>
-        ))}
+      <div className="step">
+        <div className="step-title">
+          <span className="step-num">Step 4 : </span>
+          Processing Plain Text
+        </div>
+        <ul>
+          <li>
+            Find the characters that are repeated continuously and insert 'X'
+            between them. (Note: This implies inserting 'X' in between 'XX' also.)
+            <div className="dup-rem">
+              {textX.map((c, i) => (
+                <span
+                  key={i}
+                  style={inserted_chars.has(i) ? { color: "orange"} : {}}
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+          </li>
+          <li>
+            Find the length of the updated Plain Text and append 'Z' at the end if the length of the string is odd to make ot even.
+            <div className="dup-rem">
+              {textZ.map((c, i) => (
+                <span
+                  key={i}
+                  style={(textX.length%2===1 && i===textZ.length-1) ? { color: "orange"} : {}}
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+          </li>
+          <li>
+            Now divide the processed Plain Text into di-grams(2 character words). These di-grams are encrypted using Grid in the next steps.
+            <div className="dup-rem">
+              {divideIntodigraphs(textZ).map((c, i) => (
+                <span
+                  key={i}
+                >
+                  {c}&nbsp;&nbsp;
+                </span>
+              ))}
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   );

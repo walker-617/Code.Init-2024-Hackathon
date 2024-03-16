@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { findDuplicates, createGridWithKey, DrawGrid } from "../../utils/utils";
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
 
 function RemoveDuplicates({ cipherKey }) {
   const { upd_key, dups } = findDuplicates(cipherKey);
 
   const navigate = useNavigate();
 
+  if(!cipherKey){
+    return;
+  }
   return (
     <div>
       <div
@@ -26,8 +29,8 @@ function RemoveDuplicates({ cipherKey }) {
           <li>
             Remove duplicates in the Encryption Key.
             <div className="dup-rem">
-              {cipherKey && cipherKey.split("").map((c, i) => (
-                <span key={i} style={dups && dups.has(i) ? { color: "lightgray" } : {}}>
+              {cipherKey.split("").map((c, i) => (
+                <span key={i} style={dups.has(i) ? { color: "lightgray" } : {}}>
                   {c}
                 </span>
               ))}
@@ -45,7 +48,7 @@ function RemoveDuplicates({ cipherKey }) {
             When 'J' occurs in Encryption key it is removed. So the final updated
             Encryption key becomes -
             <div className="dup-rem">
-              {upd_key && upd_key.split("").map((c, i) => (
+              {upd_key.split("").map((c, i) => (
                 <span key={i} style={c === "J" ? { color: "lightgray" } : {}}>
                   {c}
                 </span>

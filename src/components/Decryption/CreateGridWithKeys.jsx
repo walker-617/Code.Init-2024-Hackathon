@@ -1,19 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import {
-  findDuplicates,
-  DrawGrid,
-  updatedKey,
-  createGridWithKey,
-} from "../../utils/utils";
-import { useEffect, useState } from "react";
+import { findDuplicates, DrawGrid,updatedKey, createGridWithKey} from "../../utils/utils";
 
 function CreateGridWithKeys({ cipherKey }) {
+  const navigate=useNavigate();
+  if(!cipherKey){
+    return;
+  }
+  const upd_key = updatedKey(cipherKey);
 
-  const navigate = useNavigate();
-
-  const upd_key=updatedKey(cipherKey);
-
-  const grid = createGridWithKey(upd_key);
+  const grid=createGridWithKey(upd_key);
 
   return (
     <div>
@@ -40,10 +35,9 @@ function CreateGridWithKeys({ cipherKey }) {
         </div>
         <ul>
           <li>
-            Create a 5X5 grid and fill the updated Encryption key in left to
-            right and top to bottom order.
-            <div style={{ margin: "20px" }}>
-              {grid ? <DrawGrid grid={grid} /> : ""}
+            Create a 5X5 grid and fill the updated Encryption key in left to right and top to bottom order.
+            <div style={{margin:"20px"}}>
+              <DrawGrid grid={grid}/>
             </div>
           </li>
         </ul>
