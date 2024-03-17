@@ -18,17 +18,19 @@ function SplitText({ text }) {
     return digraphs;
   };
 
+  let up_text=text.replace("J","I");
+
   let textX = "";
   const inserted_chars = new Set();
-  let textZ = [text[0]];
+  let textZ = [up_text[0]];
   let a=0;
-  for (let i = 1; i < text.length; i++) {
-    if (text[i] === text[i - 1]) {
+  for (let i = 1; i < up_text.length; i++) {
+    if (up_text[i] === up_text[i - 1]) {
       textZ.push("X");
       inserted_chars.add(i+a);
       a++;
     }
-    textZ.push(text[i]);
+    textZ.push(up_text[i]);
   }
   textX = [...textZ];
   if (textZ.length % 2 !== 0) {
@@ -59,6 +61,19 @@ function SplitText({ text }) {
           Processing Plain Text
         </div>
         <ul>
+        <li>
+            Replace 'J' with 'I' in the Plain Text as there will be no 'J' in the Key Grid.
+            <div className="dup-rem">
+              {text.split("").map((c, i) => (
+                <span
+                  key={i}
+                  style={c=='J' ? { color: "orange"} : {}}
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+          </li>
           <li>
             Find the characters that are repeated continuously and insert 'X'
             between them. (Note: This implies inserting 'X' in between 'XX' also.)

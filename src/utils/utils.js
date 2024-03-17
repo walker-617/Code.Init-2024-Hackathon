@@ -66,6 +66,7 @@ function getdigraphs(text) {
   if(!text){
     return null;
   }
+  text=text.replace("J","I");
   const inserted_chars = new Set();
   let textZ = [text[0]];
   let a = 0;

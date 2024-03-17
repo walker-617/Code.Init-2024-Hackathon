@@ -75,6 +75,7 @@ function Decrypt() {
             element={<DecryptionResult cipher={cipher} cipherKey={cipherKey} />}
           />
         </Routes>
+        <div className="footer"></div>
       </div>
     </>
   );

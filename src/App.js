@@ -13,6 +13,7 @@ import Encrypt from "./components/Encryption/Encrypt";
 import Decrypt from "./components/Decryption/Decrypt";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
+import About from "./components/About";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/encrypt/*" element={<Encrypt />} />
         <Route path="/decrypt/*" element={<Decrypt />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
     // </MemoryRouter>

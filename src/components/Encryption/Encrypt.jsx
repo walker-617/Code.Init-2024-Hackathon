@@ -75,6 +75,7 @@ function Encrypt() {
             element={<EncryptionResult text={text} cipherKey={cipherKey} />}
           />
         </Routes>
+        <div className="footer"></div>
       </div>
     </>
   );

@@ -29,8 +29,8 @@ function Navbar() {
           <div className="section" onClick={() => {setNavbar(!navbar);navigate("./decrypt")}}>
             &nbsp;Decryption&nbsp;
           </div>
-          <div className="section" onClick={() => {setNavbar(!navbar);navigate("./")}}>
-            &nbsp;Crypt Analysis&nbsp;
+          <div className="section" onClick={() => {setNavbar(!navbar);navigate("./about")}}>
+            &nbsp;About&nbsp;
           </div>
           <div
             className="close"
@@ -38,7 +38,7 @@ function Navbar() {
               setNavbar(!navbar);
             }}
           >
-            X
+          ✖
           </div>
         </div>
       )}

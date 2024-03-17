@@ -5,13 +5,17 @@
   text-decoration: none;
 }
 
-body{
+html {
+  scroll-behavior: smooth
+}
+
+body {
   height: 100vh;
   width: 100vw;
   position: relative;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   display: none;
 }
 
@@ -39,7 +43,7 @@ body::-webkit-scrollbar{
 }
 
 .back {
-  position: absolute;
+  position: fixed;
   padding: 10px;
   margin: 10px;
   background-color: rgb(0, 0, 0);
@@ -51,7 +55,7 @@ body::-webkit-scrollbar{
 }
 
 .next {
-  position: absolute;
+  position: fixed;
   padding: 10px;
   margin: 10px;
   background-color: rgb(0, 0, 0);
@@ -62,42 +66,44 @@ body::-webkit-scrollbar{
   border: 3px solid black;
 }
 
-.next:hover, .back:hover{
+.next:hover,
+.back:hover {
   background-color: white;
   color: black;
   cursor: pointer;
 }
 
-.start{
+.start {
   height: 100px;
   width: 100px;
   background-color: rgb(0, 0, 0);
   color: white;
 }
 
-.text-key-inputs{
+.text-key-inputs {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.title{
+.title {
+  margin-top: 50px;
   font-weight: bolder;
   font-size: 60px;
   /* margin-top: 50px; */
 }
 
-.inputs{
+.inputs {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin: 100px;
+  margin: 50px 100px;
   gap: 10vw;
 }
 
-input{
+input {
   font-size: 20px;
   border: none;
   border-bottom: 5px solid rgb(150, 150, 150);
@@ -106,18 +112,19 @@ input{
   width: 30vw;
 }
 
-input:focus{
+input:focus {
   border-bottom: 5px solid rgb(0, 0, 0);
   box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.1);
 }
 
-.text-label, .key-label{
+.text-label,
+.key-label {
   font-weight: bold;
   font-size: 15px;
   margin-bottom: 10px;
 }
 
-.start-encryption{
+.start-encryption {
   border: 3px solid black;
   font-weight: bolder;
   cursor: pointer;
@@ -125,71 +132,76 @@ input:focus{
   font-size: 20px;
 }
 
-.start-encryption:hover{
+.start-encryption:hover {
   background-color: black;
   color: white;
 }
 
-.error{
+.error {
   color: red;
   font-weight: bold;
   margin: 20px;
   font-size: 15px;
 }
 
-.text-key{
+.text-key {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 300px;
   margin: 25px;
 }
 
-.key,.text{
+.key,
+.text {
   font-size: 30px;
   font-weight: bold;
 }
 
-.text-sec, .key-sec{
+.text-sec,
+.key-sec {
   border: 2px solid black;
   padding: 10px 40px 10px 20px;
 }
 
-.text-sec :nth-child(1), .key-sec :nth-child(1){
+.text-sec :nth-child(1),
+.key-sec :nth-child(1) {
   font-size: 12px;
 }
 
-.step{
+.step {
   margin: 20px 50px;
 }
 
-.step-title{
+.step-title {
   display: flex;
-  align-items:baseline;
+  align-items: baseline;
+  flex-wrap: wrap;
   font-size: 40px;
   font-weight: bold;
 }
 
-.step-num{
+.step-num {
   font-size: 20px;
   margin-right: 10px;
 }
 
-.rule-title{
+.rule-title {
   font-size: 40px;
   font-weight: bold;
 }
 
-ul{
+ul {
   margin: 20px;
 }
 
-li{
+li {
   font-size: 20px;
   margin-top: 10px;
 }
 
-.dup-rem{
+.dup-rem {
   display: flex;
   flex-wrap: wrap;
   /* justify-content: center; */
@@ -201,37 +213,40 @@ li{
   margin: 20px;
 }
 
-.input-cells, .output-cells{
+.input-cells,
+.output-cells {
   display: flex;
   gap: 10px;
   align-items: center;
   justify-content: center;
 }
 
-.input-cells div,.output-cells div{
+.input-cells div,
+.output-cells div {
   width: 10px;
   height: 10px;
 }
 
-.transformation{
+.transformation {
   display: flex;
   gap: 50px;
   justify-content: space-evenly;
   align-items: center;
+  /* flex-wrap: wrap; */
 }
 
-.digraph-block{
+.digraph-block {
   cursor: pointer;
   color: lightgrey;
 }
 
-.rule-block{
+.rule-block {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.rule{
+.rule {
   font-size: 20px;
   font-weight: bold;
   padding: 10px;
@@ -241,7 +256,7 @@ li{
   cursor: pointer;
 }
 
-.rule:hover{
+.rule:hover {
   color: black;
   background-color: white;
 }
@@ -251,28 +266,32 @@ li{
   font-weight: bold;;
 } */
 
-.output-char{
+.output-char {
   font-size: 40px;
   font-weight: bold;
 }
 
-.result{
+.result {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 50px;
+  margin: 50px;
+  gap: 30px;
 }
 
-.instant-result{
+.instant-result {
   display: flex;
+  justify-content: center;
   align-items: center;
   margin-bottom: 50px;
+  flex-wrap: wrap;
   gap: 50px;
+  margin: 0 20px 50px 20px;
 }
 
-.instant-result :nth-child(1){
+.instant-result :nth-child(1) {
   font-size: 20px;
   font-weight: bold;
   padding: 10px;
@@ -280,27 +299,27 @@ li{
   cursor: pointer;
 }
 
-.instant-result :nth-child(1):hover{
+.instant-result :nth-child(1):hover {
   background-color: black;
   color: white;
 }
 
-.instant-result :nth-child(2){
+.instant-result :nth-child(2) {
   font-size: 25px;
   font-weight: bold;
   padding: 5px;
   border-bottom: 5px solid black;
 }
 
-.nav-bar{
-  position: absolute;
+.nav-bar {
+  position: fixed;
   top: 0;
   left: 0;
   margin: 20px;
   z-index: 100;
 }
 
-.nav-bar-icon{
+.nav-bar-icon {
   width: 50px;
   height: 50px;
   background-color: black;
@@ -313,13 +332,13 @@ li{
   gap: 5px;
 }
 
-.nav-bar-icon-line{
+.nav-bar-icon-line {
   height: 5px;
   width: 30px;
   background-color: white;
 }
 
-.full-navbar{
+.full-navbar {
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -329,24 +348,24 @@ li{
   position: relative;
 }
 
-.section{
+.section {
   color: white;
   font-size: 20px;
   margin: 5px;
   padding: 5px;
-  padding-left: 5px; 
+  padding-left: 5px;
   border-left: 5px solid white;
   cursor: pointer;
 }
 
-.section:hover{
+.section:hover {
   background-color: white;
   color: black;
 }
 
-.close{
+.close {
   color: white;
-  font-size: 30px;
+  font-size: 25px;
   position: absolute;
   top: 0;
   right: 0;
@@ -359,7 +378,160 @@ li{
   cursor: pointer;
 }
 
-.close:hover{
+.close:hover {
   background-color: white;
   color: black;
+}
+
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 10vw;
+}
+
+.main-title {
+  font-size: 60px;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.description {
+  /* width: 75vw; */
+  font-size: 20px;
+  text-indent: 100px;
+}
+
+.terms {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+
+.terms-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.term {
+  margin: 10px;
+  font-size: 20px;
+  padding: 5px 10px;
+  border: 2px solid lightgrey;
+  cursor: pointer;
+  font-weight: 500;
+  width: 100%;
+}
+
+.term:hover {
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+}
+
+.term-description {
+  font-size: 20px;
+  /* width: 500px; */
+  /* height: 250px; */
+  padding: 20px;
+  /* border: 2px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-indent: 100px;
+}
+
+.section-title {
+  font-size: 30px;
+  font-weight: bold;
+  align-self: flex-start;
+  margin: 20px 0 10px 0;
+  ;
+}
+
+.footer {
+  height: 50px;
+}
+
+.name-image {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+  /* gap: 60px; */
+  margin-top: 60px;
+  width: 100%;
+}
+
+.name {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.image {
+  height: 250px;
+}
+
+.content-bar{
+  position: fixed;
+  align-self: flex-start;
+  margin: 20px 0;
+  top: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: black;
+}
+
+.content{
+  font-size: 15px;
+  text-decoration:underline;
+  margin: 10px;
+  color:  white;
+}
+
+@media (max-width: 900px) {
+  .terms {
+    flex-direction: column;
+    gap: 10px;
+    width: unset;
+  }
+
+  .terms-section {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .nav-bar {
+    margin: 10px;
+  }
+
+  .nav-bar-icon {
+    width: 40px;
+    height: 40px;
+    gap: 4px;
+  }
+
+  .nav-bar-icon-line {
+    height: 4px;
+    width: 25px;
+  }
+
+  input {
+    width: 70vw;
+  }
+
+  .text-key {
+    gap: 10vw;
+  }
+
+  .transformation {
+    flex-direction: column;
+  }
 }
